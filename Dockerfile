@@ -1,7 +1,7 @@
 FROM rust:slim-trixie AS build
 WORKDIR /app
-COPY . /app
-CMD rustc /app/src/main.rs
+COPY rust/ /app
+CMD cargo build
 
 FROM gcr.io/distroless/base:debug
-COPY --from=build /app/main /bin
+COPY --from=build /app/target/debug/core /bin
